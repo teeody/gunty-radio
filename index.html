@@ -7,50 +7,21 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#07070F;
-  --bg-2:#0C0C1A;
-  --glass:rgba(255,255,255,.05);
-  --glass-2:rgba(255,255,255,.085);
-  --glass-3:rgba(255,255,255,.13);
-  --line:rgba(255,255,255,.09);
-  --line-2:rgba(255,255,255,.17);
-  --blue:#3B82F6;
-  --blue-2:#7DA8FF;
-  --cyan:#22D3EE;
-  --green:#10B981;
-  --green-2:#4ADE9E;
-  --purple:#8B5CF6;
-  --purple-2:#B79BFF;
-  --pink:#EC4899;
-  --pink-2:#F9A8D4;
-  --grad:linear-gradient(115deg,var(--blue),var(--purple) 38%,var(--pink) 68%,var(--green));
-  --grad-line:linear-gradient(115deg,var(--cyan),var(--blue) 30%,var(--purple) 62%,var(--pink));
-  --text:#EEF2FF;
-  --text-2:#C6CCF5;
-  --text-dim:#8A90B6;
-  --r:20px;
-  --r-sm:13px;
-  --r-pill:999px;
-  --shadow:0 18px 40px -20px rgba(0,0,0,.9);
-  --shadow-lg:0 34px 70px -26px rgba(0,0,0,.95);
+  --bg:#1a1d16; --bg2:#22271d; --panel:#3a4334; --panel2:#2a3125; --panel3:#4a5542;
+  --bevel-hi:#7a8770; --bevel-lo:#12160f; --line:#5f6b56;
+  --lcd:#1c2716; --lcd2:#0f160c; --lime:#9dff57; --lime2:#d7ff9d; --amber:#ffcc4d;
+  --text:#e8efe0; --text-dim:#aebba3; --red:#ff5f5f;
+  --shadow:0 6px 0 rgba(0,0,0,.35);
+  --r:0px;
 }
-html{
-  font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  background:var(--bg);color:var(--text);
-  scroll-behavior:smooth;-webkit-text-size-adjust:100%;
-}
+html{font-family:Tahoma,Verdana,"MS Sans Serif",Arial,sans-serif;background:var(--bg);color:var(--text);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  min-height:100vh;min-height:100dvh;overflow-x:hidden;
-  color:var(--text);
-  background-color:var(--bg);
-  background-image:
-    radial-gradient(48rem 48rem at 10% -10%,rgba(59,130,246,.30),transparent 62%),
-    radial-gradient(42rem 42rem at 94% 2%,rgba(236,72,153,.22),transparent 64%),
-    radial-gradient(46rem 46rem at 80% 98%,rgba(139,92,246,.24),transparent 64%),
-    radial-gradient(40rem 40rem at 2% 86%,rgba(16,185,129,.18),transparent 62%);
-  background-attachment:fixed;
-  background-repeat:no-repeat;
+  min-height:100vh;overflow-x:hidden;color:var(--text);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.03),transparent 30%),
+    repeating-linear-gradient(180deg,#1a1d16 0,#1a1d16 2px,#171a13 2px,#171a13 4px);
 }
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.15;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.35) 2px,rgba(0,0,0,.35) 4px)}
 
 @keyframes eqBar{0%,100%{height:4px}50%{height:18px}}
 @keyframes spinSlow{to{transform:rotate(360deg)}}
@@ -64,128 +35,34 @@ body{
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
-/* HEADER */
-.header{
-  position:sticky;top:0;z-index:100;
-  padding:12px 16px;
-  background:rgba(7,7,15,.62);
-  -webkit-backdrop-filter:blur(18px) saturate(160%);
-  backdrop-filter:blur(18px) saturate(160%);
-  border-bottom:1px solid var(--line);
-  box-shadow:0 10px 34px -22px rgba(0,0,0,.95);
-}
-.header::after{
-  content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;
-  background:var(--grad);background-size:200% 100%;
-  animation:gradShift 9s ease infinite;opacity:.95;
-}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.logo-icon{
-  position:relative;
-  width:42px;height:42px;border-radius:50%;flex-shrink:0;
-  background:conic-gradient(from 0deg,
-    var(--cyan) 0deg,var(--blue) 62deg,var(--purple) 132deg,
-    var(--pink) 202deg,var(--green) 272deg,var(--cyan) 360deg);
-  animation:spinSlow 9s linear infinite;
-  box-shadow:0 0 22px -6px rgba(139,92,246,.9);
-}
-.logo-icon::before{
-  content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  border-radius:50%;pointer-events:none;
-  background:linear-gradient(140deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.08) 38%,rgba(255,255,255,0) 62%);
-}
-.logo-icon::after{
-  content:'';position:absolute;left:50%;top:50%;
-  width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;
-  background:var(--bg-2);
-  box-shadow:0 0 0 2px rgba(255,255,255,.4);
-}
-.logo-text{
-  font-size:25px;font-weight:800;letter-spacing:-.5px;line-height:1;
-  color:var(--blue-2);
-}
-@supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .logo-text{
-    background:var(--grad);background-size:200% 100%;
-    -webkit-background-clip:text;background-clip:text;
-    -webkit-text-fill-color:transparent;color:transparent;
-  }
-}
-.search-wrap{flex:1;min-width:0;max-width:400px;position:relative}
-.search{
-  width:100%;padding:11px 15px 11px 40px;
-  background:var(--glass);border:1px solid var(--line);
-  border-radius:var(--r-pill);
-  color:var(--text);font-size:14px;font-family:inherit;font-weight:600;
-  outline:none;transition:border-color .25s,background .25s,box-shadow .25s;
-  -webkit-appearance:none;appearance:none;
-}
-.search::placeholder{color:var(--text-dim)}
-.search:hover{background:var(--glass-2)}
-.search:focus{
-  background:var(--glass-2);border-color:rgba(59,130,246,.75);
-  box-shadow:0 0 0 4px rgba(59,130,246,.16);
-}
-.search-icon{
-  position:absolute;left:15px;top:50%;transform:translateY(-50%);
-  width:17px;height:17px;color:var(--text-dim);pointer-events:none;
-}
-.filters{display:flex;gap:7px;flex-wrap:wrap;width:100%;padding-top:6px}
-.filter-btn{
-  padding:7px 15px;border-radius:var(--r-pill);
-  border:1px solid var(--line-2);
-  background:var(--glass);color:var(--text-2);
-  font-size:11.5px;font-weight:700;font-family:inherit;
-  cursor:pointer;transition:all .22s ease;white-space:nowrap;
-  text-transform:uppercase;letter-spacing:.6px;
-  -webkit-appearance:none;appearance:none;
-}
-.filter-btn:hover{
-  background:var(--glass-2);color:var(--text);
-  border-color:rgba(34,211,238,.6);transform:translateY(-1px);
-}
-.filter-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
-.filter-btn.active{
-  background:var(--grad);background-size:200% 100%;
-  animation:gradShift 7s ease infinite;
-  border-color:transparent;color:#fff;font-weight:800;
-  box-shadow:0 6px 20px -8px rgba(139,92,246,.95);
-}
+/* HEADER / WINAMP */
+.header{position:sticky;top:0;z-index:100;padding:10px 12px;background:linear-gradient(180deg,#596553,#303828 55%,#252b1f);border-bottom:2px solid #111;border-top:1px solid #8a9680;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 4px 0 rgba(0,0,0,.25)}
+.header::after{content:"";position:absolute;left:8px;right:8px;bottom:4px;height:2px;background:linear-gradient(90deg,#111,#6f7a63,#111);opacity:.7}
+.header-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0;padding:4px 8px;border:2px solid #171b13;background:linear-gradient(180deg,#20261b,#12160f);box-shadow:inset 1px 1px 0 #6f7a63,inset -1px -1px 0 #000}
+.logo-icon{width:34px;height:34px;flex-shrink:0;border:2px solid #111;background:radial-gradient(circle at 30% 30%,#d7ff9d,#8cff3f 35%,#2b4a15 70%,#111 100%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.12),0 0 10px rgba(143,255,91,.25)}
+.logo-icon::before,.logo-icon::after{display:none}
+.logo-text{font-size:28px;font-weight:900;letter-spacing:2px;line-height:1;color:#d7ff9d;text-shadow:0 0 8px rgba(157,255,87,.45),2px 2px 0 #111;font-family:"Arial Black",Impact,Tahoma,sans-serif}
+.search-wrap{flex:1;min-width:220px;max-width:420px;position:relative}
+.search{width:100%;padding:10px 12px 10px 36px;background:linear-gradient(180deg,#10150d,#1b2316);border:2px solid #111;color:#9dff57;font:700 13px "Courier New",monospace;outline:none;box-shadow:inset 1px 1px 0 #000,inset -1px -1px 0 #66725b}
+.search::placeholder{color:#72905b}
+.search:hover,.search:focus{border-color:#6f8e4d;box-shadow:inset 1px 1px 0 #000,0 0 0 1px #9dff57}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#9dff57}
+.filters{display:flex;gap:6px;flex-wrap:wrap;width:100%;padding-top:6px}
+.filter-btn{padding:7px 10px;border:2px solid #111;background:linear-gradient(180deg,#697560,#3b4635);color:#eef5e4;font:700 11px Tahoma,Verdana,sans-serif;cursor:pointer;text-transform:uppercase;letter-spacing:.4px;box-shadow:inset 1px 1px 0 #98a58c,inset -1px -1px 0 #141a11}
+.filter-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.filter-btn.active,.filter-btn:focus-visible{background:linear-gradient(180deg,#d4decc,#909d84);color:#1a2115;outline:none;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #4a5542}
 
 /* MAIN */
-.main{max-width:1200px;margin:0 auto;padding:20px 14px 132px}
+.main{max-width:1240px;margin:0 auto;padding:18px 12px 24px}
 .stations-grid{display:grid;grid-template-columns:1fr;gap:15px}
 
 /* STATION CARD */
-.station-card{
-  position:relative;overflow:hidden;cursor:pointer;
-  padding:17px;border-radius:var(--r);
-  background:var(--glass);
-  border:1px solid var(--line);
-  -webkit-backdrop-filter:blur(12px);
-  backdrop-filter:blur(12px);
-  box-shadow:var(--shadow);
-  transition:transform .3s cubic-bezier(.2,.8,.3,1),border-color .3s,box-shadow .3s,background .3s;
-  animation:slideUp .38s ease both;
-}
-.station-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:var(--grad-line);background-size:200% 100%;
-  animation:gradShift 11s ease infinite;opacity:.9;
-}
-.station-card::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(28rem 18rem at 100% 0%,rgba(139,92,246,.14),transparent 70%);
-  opacity:0;transition:opacity .35s;
-}
-.station-card:hover{
-  transform:translateY(-4px);
-  background:var(--glass-2);border-color:rgba(34,211,238,.45);
-  box-shadow:var(--shadow-lg),0 0 34px -14px rgba(59,130,246,.75);
-}
-.station-card:hover::after{opacity:1}
-.station-card:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.station-card{position:relative;overflow:hidden;cursor:pointer;padding:14px;border:2px solid #111;background:linear-gradient(180deg,#56614d,#353e30 18%,#2b3326);box-shadow:inset 1px 1px 0 #87947b,inset -1px -1px 0 #0d110b,0 4px 0 rgba(0,0,0,.25);transition:transform .12s,filter .12s;animation:slideUp .2s ease both}
+.station-card::before{content:"";position:absolute;top:0;left:0;right:0;height:18px;background:linear-gradient(180deg,#7b8870,#4f5a46);border-bottom:1px solid #111;opacity:.95}
+.station-card::after{display:none}
+.station-card:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.station-card:focus-visible{outline:2px solid #9dff57;outline-offset:2px}
 .station-card:nth-child(1){animation-delay:.02s}
 .station-card:nth-child(2){animation-delay:.06s}
 .station-card:nth-child(3){animation-delay:.1s}
@@ -202,11 +79,13 @@ body{
     linear-gradient(rgba(12,12,26,.94),rgba(12,12,26,.94)) padding-box,
     var(--grad) border-box;
   border:1.5px solid transparent;
-  animation:slideUp .38s ease both,glowPulse 3.2s ease-in-out infinite;
+  
 }
 .station-card-top{display:flex;align-items:flex-start;gap:13px;margin-bottom:13px;position:relative;z-index:1}
 .station-icon{
-  width:54px;height:54px;border-radius:16px;flex-shrink:0;
+  width:52px;height:52px;border-radius:0;flex-shrink:0;border:2px solid #111;
+  background:linear-gradient(180deg,#20271b,#10150d)!important;color:#9dff57!important;
+  box-shadow:inset 1px 1px 0 #66725b,inset -1px -1px 0 #000;
   display:flex;align-items:center;justify-content:center;
   font-size:18px;font-weight:900;color:#fff;letter-spacing:.5px;
   box-shadow:0 8px 20px -10px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.28);
@@ -219,18 +98,13 @@ body{
 }
 .station-card:hover .station-icon{transform:scale(1.06) rotate(-3deg)}
 .station-meta{flex:1;min-width:0}
-.station-name{font-size:16.5px;font-weight:800;line-height:1.25;margin-bottom:4px;color:var(--text);letter-spacing:-.2px}
+.station-name{font-size:15px;font-weight:900;line-height:1.25;margin-bottom:4px;color:#f0f5e8;letter-spacing:.2px;text-transform:uppercase}
 .station-desc{
-  font-size:12.5px;color:var(--text-dim);line-height:1.45;font-weight:500;
+  font-size:12px;color:#bcc8b0;line-height:1.4;font-weight:500;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
 .station-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px;position:relative;z-index:1}
-.tag{
-  padding:3.5px 10px;border-radius:var(--r-pill);
-  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
-  background:rgba(139,92,246,.14);color:var(--purple-2);
-  border:1px solid rgba(139,92,246,.3);
-}
+.tag{padding:3px 8px;border:1px solid #111;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:#1a2115;color:#b7ff76;box-shadow:inset 1px 1px 0 #394333}
 .station-bottom{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
 .station-status{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-dim);font-weight:600}
 .status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(16,185,129,.95)}
@@ -380,9 +254,9 @@ body{
 .error-toast{
   position:fixed;top:78px;left:16px;right:16px;z-index:300;
   display:none;padding:13px 17px;text-align:center;
-  border-radius:var(--r-sm);
+  border-radius:0;
   background:rgba(30,10,40,.92);
-  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  -webkit-
   border:1px solid rgba(236,72,153,.6);
   color:var(--pink-2);font-size:13px;font-weight:700;
   box-shadow:0 18px 40px -18px rgba(236,72,153,.6);
@@ -442,18 +316,22 @@ body{
       <div class="logo-icon"></div>
       <div class="logo-text">Gunty Radio</div>
     </div>
+    <a class="report-link" href="mailto:teeody%2Bgithub@proton.me?subject=Gunty%20Radio%20Problem%20Report">Report a problem</a>
     <div class="search-wrap">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input type="text" class="search" placeholder="Search stations..." id="searchInput">
     </div>
+    <div class="gunty-banner">GUNTY RADIO /// OLD-SCHOOL STREAM MACHINE /// YACHT ROCK + PORTUGAL + PUNK ADDED</div>
     <div class="filters" id="filters">
       <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="yachtrock">Yacht Rock</button>
+      <button class="filter-btn" data-filter="portugal">Portugal</button>
       <button class="filter-btn" data-filter="rock">Rock</button>
+      <button class="filter-btn" data-filter="punk">Punk</button>
       <button class="filter-btn" data-filter="metal">Metal</button>
       <button class="filter-btn" data-filter="alternative">Alt</button>
       <button class="filter-btn" data-filter="hiphop">Hip Hop</button>
       <button class="filter-btn" data-filter="funk">Funk/Soul</button>
-      <button class="filter-btn" data-filter="punk">Punk</button>
       <button class="filter-btn" data-filter="classical">Classical</button>
       <button class="filter-btn" data-filter="jazz">Jazz/Swing</button>
       <button class="filter-btn" data-filter="jamband">Jam</button>
@@ -504,6 +382,256 @@ body{
 <script>
 const stations = [
   {
+    id: '181-yacht-rock-main',
+    name: '181.FM Yacht Rock',
+    desc: 'Smooth grooves all day long. Certified 70s/80s yacht rock and soft rock classics.',
+    tags: ['Yacht Rock', 'Soft Rock', '70s/80s'],
+    filter: 'yachtrock',
+    color: '#38BDF8',
+    icon: 'YR',
+    url: 'http://listen.181fm.com/181-yachtrock_128k.mp3',
+    altUrls: []
+  },
+  {
+    id: 'smooth-jazz-yacht',
+    name: '101 Smooth Jazz',
+    desc: 'Smooth, mellow grooves with a yacht-rock-friendly vibe for easy listening.',
+    tags: ['Yacht Rock', 'Smooth', 'Easy Listening'],
+    filter: 'yachtrock',
+    color: '#22D3EE',
+    icon: 'SJ',
+    url: 'https://ais-sa5.cdnstream1.com/b22139_128mp3',
+    altUrls: []
+  },
+  {
+    id: 'breeze-yacht',
+    name: '181.FM The Breeze',
+    desc: 'Mellow soft favorites and smooth grooves - a relaxing yacht-rock adjacent stream.',
+    tags: ['Yacht Rock', 'Soft Rock', 'Mellow'],
+    filter: 'yachtrock',
+    color: '#34D399',
+    icon: 'BRZ',
+    url: 'http://listen.181fm.com/181-breeze_128k.mp3',
+    altUrls: []
+  },
+  {
+    id: 'somafm-seventies',
+    name: 'SomaFM Left Coast 70s',
+    desc: 'Mellow album rock from the 70s. Yacht rock vibes, smooth grooves, and classic California sounds.',
+    tags: ['Yacht Rock', '70s', 'Mellow Rock'],
+    filter: 'yachtrock',
+    color: '#F472B6',
+    icon: 'LC',
+    url: 'https://ice1.somafm.com/seventies-128-mp3',
+    altUrls: [
+      'https://ice2.somafm.com/seventies-128-mp3'
+    ]
+  },
+  {
+    id: '181-greatoldies',
+    name: '181.FM Classic Hits 181',
+    desc: 'Classic pop and soft rock hits that sail smooth. Great for yacht rock moods.',
+    tags: ['Yacht Rock', 'Classic Hits', 'Soft Rock'],
+    filter: 'yachtrock',
+    color: '#FBBF24',
+    icon: 'CH',
+    url: 'http://listen.181fm.com/181-greatoldies_128k.mp3',
+    altUrls: []
+  },
+  {
+    id: '181-lite80s',
+    name: '181.FM Lite 80s',
+    desc: 'Soft 80s pop and rock. Smooth synths, mellow vocals, and yacht-adjacent classics.',
+    tags: ['Yacht Rock', '80s', 'Soft Pop'],
+    filter: 'yachtrock',
+    color: '#60A5FA',
+    icon: 'L80',
+    url: 'http://listen.181fm.com/181-lite80s_128k.mp3',
+    altUrls: []
+  },
+  {
+    id: '181-eagle',
+    name: '181.FM The Eagle',
+    desc: 'Classic rock with plenty of smooth 70s staples. Easy cruising rock favorites.',
+    tags: ['Yacht Rock', 'Classic Rock', '70s'],
+    filter: 'yachtrock',
+    color: '#A3E635',
+    icon: 'EGL',
+    url: 'http://listen.181fm.com/181-eagle_128k.mp3',
+    altUrls: []
+  },
+  {
+    id: '181-awesome80s',
+    name: '181.FM Awesome 80s',
+    desc: '80s hits with smooth pop-rock sheen. Singalong classics for the yacht deck.',
+    tags: ['Yacht Rock', '80s', 'Pop Rock'],
+    filter: 'yachtrock',
+    color: '#FB923C',
+    icon: 'A80',
+    url: 'http://listen.181fm.com/181-awesome80s_128k.mp3',
+    altUrls: []
+  },
+{
+    id: 'rfm-pt',
+    name: 'RFM Portugal',
+    desc: 'Portugal’s biggest pop radio station. Current hits and feel-good music from Lisbon.',
+    tags: ['Portugal', 'Pop', 'Hits'],
+    filter: 'portugal',
+    color: '#EF4444',
+    icon: 'RFM',
+    url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/RFMAAC_SC',
+    altUrls: []
+  },
+{
+    id: 'radio-comercial',
+    name: 'Rádio Comercial',
+    desc: 'Top Portuguese pop station. Chart hits, morning shows, and the biggest songs in Portugal.',
+    tags: ['Portugal', 'Pop', 'Top 40'],
+    filter: 'portugal',
+    color: '#F97316',
+    icon: 'RC',
+    url: 'https://stream-icy.bauermedia.pt/comercial.mp3',
+    altUrls: []
+  },
+{
+    id: 'm80-portugal',
+    name: 'M80 Rádio Portugal',
+    desc: 'Portugal’s 70s, 80s and 90s station. Classic hits and timeless favorites.',
+    tags: ['Portugal', '80s', '90s'],
+    filter: 'portugal',
+    color: '#FACC15',
+    icon: 'M80',
+    url: 'https://stream-icy.bauermedia.pt/m80.mp3',
+    altUrls: []
+  },
+{
+    id: 'cidade-fm',
+    name: 'Cidade FM',
+    desc: 'Portugal’s hit music station. Pop, dance and the newest chart music.',
+    tags: ['Portugal', 'Pop', 'Dance'],
+    filter: 'portugal',
+    color: '#EC4899',
+    icon: 'CF',
+    url: 'https://stream-icy.bauermedia.pt/cidade.mp3',
+    altUrls: []
+  },
+{
+    id: 'mega-hits-pt',
+    name: 'Mega Hits',
+    desc: 'Portugal’s youth pop station. Fresh hits, top charts and new music.',
+    tags: ['Portugal', 'Pop', 'Top 40'],
+    filter: 'portugal',
+    color: '#A855F7',
+    icon: 'MH',
+    url: 'https://25703.live.streamtheworld.com/MEGA_HITS_SC',
+    altUrls: []
+  },
+{
+    id: 'renascenca',
+    name: 'Rádio Renascença',
+    desc: 'One of Portugal’s most listened stations. News, talk, Portuguese music and pop.',
+    tags: ['Portugal', 'News', 'Pop'],
+    filter: 'portugal',
+    color: '#60A5FA',
+    icon: 'RR',
+    url: 'https://22653.live.streamtheworld.com/RADIO_RENASCENCAAAC.aac',
+    altUrls: []
+  },
+{
+    id: 'antena1-pt',
+    name: 'Antena 1 RTP',
+    desc: 'Portugal’s public radio. News, sports, Portuguese culture and music.',
+    tags: ['Portugal', 'Public Radio', 'News'],
+    filter: 'portugal',
+    color: '#10B981',
+    icon: 'A1',
+    url: 'https://streaming-live.rtp.pt/liveradio/antena180a/playlist.m3u8',
+    altUrls: [
+      'https://streaming-live.rtp.pt/liveradio/antena180a/playlist.m3u8'
+    ]
+  },
+{
+    id: 'antena2-pt',
+    name: 'Antena 2 RTP',
+    desc: 'Portugal’s classical and culture station. Jazz, world music and arts.',
+    tags: ['Portugal', 'Classical', 'Culture'],
+    filter: 'portugal',
+    color: '#8B5CF6',
+    icon: 'A2',
+    url: 'https://streaming-live.rtp.pt/liveradio/antena280a/playlist.m3u8',
+    altUrls: [
+      'https://streaming-live.rtp.pt/liveradio/antena280a/playlist.m3u8'
+    ]
+  },
+{
+    id: 'antena3-pt',
+    name: 'Antena 3 RTP',
+    desc: 'Portugal’s alternative and new music public station. Indie, pop and Portuguese artists.',
+    tags: ['Portugal', 'Alternative', 'Indie'],
+    filter: 'portugal',
+    color: '#14B8A6',
+    icon: 'A3',
+    url: 'https://streaming-live.rtp.pt/liveradio/antena380a/playlist.m3u8',
+    altUrls: [
+      'https://streaming-live.rtp.pt/liveradio/antena380a/playlist.m3u8'
+    ]
+  },
+  {
+    id: 'observador-pt',
+    name: 'Rádio Observador',
+    desc: 'Portugal’s leading news and talk radio. Breaking news, analysis and conversation.',
+    tags: ['Portugal', 'News', 'Talk'],
+    filter: 'portugal',
+    color: '#64748B',
+    icon: 'OBS',
+    url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/OBSERVADORAAC.aac',
+    altUrls: []
+  },
+  {
+    id: 'idobi-radio',
+    name: 'idobi Radio',
+    desc: 'Alternative punk, pop-punk and emo. New music and scene favorites, 24/7.',
+    tags: ['Punk', 'Pop Punk', 'Alternative'],
+    filter: 'punk',
+    color: '#84CC16',
+    icon: 'IDO',
+    url: 'https://idobi-live-a.cdnstream1.com/10723_128.mp3',
+    altUrls: []
+  },
+  {
+    id: 'alt947-punk',
+    name: '.977 Alternative',
+    desc: 'Alternative rock with punk energy. Modern rock, punk, and loud guitars.',
+    tags: ['Punk', 'Alternative', 'Rock'],
+    filter: 'punk',
+    color: '#F43F5E',
+    icon: '977',
+    url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/977_ALTERN_SC',
+    altUrls: []
+  },
+  {
+    id: '181-buzz',
+    name: '181.FM The Buzz',
+    desc: 'Alternative and punk-leaning rock. High energy tracks and modern edge.',
+    tags: ['Punk', 'Alternative', 'Rock'],
+    filter: 'punk',
+    color: '#FB7185',
+    icon: 'BZ',
+    url: 'http://listen.181fm.com/181-buzz_128k.mp3',
+    altUrls: []
+  },
+  {
+    id: 'radiobob-punk',
+    name: 'RADIO BOB! Punk',
+    desc: 'Punk rock all day - loud guitars, fast drums, and singalong anthems.',
+    tags: ['Punk', 'Punk Rock', 'Rock'],
+    filter: 'punk',
+    color: '#DC2626',
+    icon: 'BOB',
+    url: 'https://streams.radiobob.de/bob-punk/mp3-192/mediaplayer',
+    altUrls: []
+  },
+{
     id: 'wsou',
     name: 'WSOU 89.5 FM',
     desc: 'Seton Hall University\'s Pirate Radio. The Loudest Rock in NJ and NYC since 1948.',
@@ -516,7 +644,7 @@ const stations = [
       'https://crystalout.surfernetwork.com:8001/WSOU_MP3'
     ]
   },
-  {
+{
     id: 'wbjb',
     name: 'WJBJ 90.5 The Night',
     desc: 'Brookdale Public Radio. AAA format serving Central New Jersey with news and music.',
@@ -529,20 +657,7 @@ const stations = [
       'https://ice.wbjb.net/905-MP3-Low'
     ]
   },
-  {
-    id: 'bagel',
-    name: 'BAGeL Radio',
-    desc: 'Indie rock, noise pop, and everything in between. 480 Minutes of non-stop alternative.',
-    tags: ['Indie Rock', 'Noise Pop', 'Alternative'],
-    filter: 'alternative',
-    color: '#8B5CF6',
-    icon: 'B',
-    url: 'https://ais-sa3.cdnstream1.com/2606_128.mp3',
-    altUrls: [
-      'https://ais-sa3.cdnstream1.com/2606_128.aac'
-    ]
-  },
-  {
+{
     id: 'wefunk',
     name: 'WEFUNK Radio',
     desc: 'Hip-hop, funk & soul. The deepest online archives since 1999. Montreal\'s finest.',
@@ -553,7 +668,7 @@ const stations = [
     url: 'https://s-00.wefunkradio.com:8443/wefunk64.mp3',
     altUrls: []
   },
-  {
+{
     id: 'kexp',
     name: 'KEXP-FM',
     desc: 'Seattle\'s listener-supported music station. Where the music matters. 90.3 FM.',
@@ -567,7 +682,7 @@ const stations = [
       'https://kexp.streamguys1.com/kexp160.aac'
     ]
   },
-  {
+{
     id: 'underground-hiphop',
     name: 'ALL-Underground Hip Hop',
     desc: 'The best in underground hip-hop from the 90\'s to the present. Independent beats.',
@@ -578,7 +693,7 @@ const stations = [
     url: 'https://stream.radiojar.com/c1912tk5rtzuv',
     altUrls: []
   },
-  {
+{
     id: 'rock-antenne',
     name: 'Rock Antenne - Alternative',
     desc: 'Germany\'s alternative rock station. The best alternative hits from the last decades.',
@@ -591,18 +706,7 @@ const stations = [
       'https://stream.rockantenne.de/alternative/stream/aacp'
     ]
   },
-  {
-    id: 'xrock',
-    name: 'Alternative X-Rock Radio',
-    desc: 'Best alternative rock from Canada. Indie, grunge, and everything alternative.',
-    tags: ['Alternative', 'Indie Rock', 'Canadian'],
-    filter: 'alternative',
-    color: '#06B6D4',
-    icon: 'XR',
-    url: 'https://kathy.torontocast.com:2475/stream',
-    altUrls: []
-  },
-  {
+{
     id: 'gdradio',
     name: 'GDRadio',
     desc: 'Streaming Grateful Dead and more 24/7/365. Jerry Garcia, Ratdog, Phil & Friends.',
@@ -613,7 +717,7 @@ const stations = [
     url: 'https://ssl.rockhost.com/proxy/gdradiov2?mp=/stream',
     altUrls: []
   },
-  {
+{
     id: 'punkrock',
     name: 'punkrockradio.ca',
     desc: 'Canada\'s 24/7 punk rock station. Best punk hits from the last 30 years.',
@@ -624,7 +728,7 @@ const stations = [
     url: 'https://bigrradio.cdnstream1.com/5218_128',
     altUrls: []
   },
-  {
+{
     id: 'hionline',
     name: 'Hi On Line Radio - Classical',
     desc: 'High resolution 320kbps classical music. Dutch internet radio at its finest.',
@@ -635,7 +739,7 @@ const stations = [
     url: 'https://ais-sa2.cdnstream1.com/2208_128.mp3',
     altUrls: []
   },
-  {
+{
     id: 'wgdr',
     name: 'WGDR.rocks',
     desc: '24 hour streaming Grateful Dead radio. 800+ hours of Dead music curated.',
@@ -646,7 +750,7 @@ const stations = [
     url: 'https://wgdr.broadcasttool.stream/wgdr_128',
     altUrls: []
   },
-  {
+{
     id: 'talksport',
     name: 'talkSPORT',
     desc: 'The world\'s biggest sports radio station. Live Premier League commentary and debate.',
@@ -657,31 +761,7 @@ const stations = [
     url: 'https://radio.talksport.com/stream',
     altUrls: []
   },
-  {
-    id: 'thirdrock',
-    name: 'Third Rock Radio',
-    desc: 'NASA\'s Space Station Greetings. New rock discovery at the speed of light, from Houston.',
-    tags: ['Alternative', 'Indie Rock', 'New Rock'],
-    filter: 'alternative',
-    color: '#0284C7',
-    icon: 'TR',
-    url: 'https://rfcm.streamguys1.com/thirdrock-mp3',
-    altUrls: [
-      'https://rfcm.streamguys1.com/thirdrock-icy'
-    ]
-  },
-  {
-    id: 'fxalt',
-    name: 'FX Alternative Radio',
-    desc: 'A great mix of AAA, alternative rock and indie. Everything alternative, all day long.',
-    tags: ['AAA', 'Alternative', 'Indie'],
-    filter: 'alternative',
-    color: '#E11D48',
-    icon: 'FX',
-    url: 'https://2radio.shoutcastservices.com/proxy/ryan2/stream',
-    altUrls: []
-  },
-  {
+{
     id: 'radiosymphony',
     name: 'Radio Symphony',
     desc: 'Only classical music, 24 hours a day. Symphonic, lyrical, sacred and chamber, live from Manhattan.',
@@ -692,7 +772,7 @@ const stations = [
     url: 'https://streaming.radiostreamlive.com/radiosymphony_devices',
     altUrls: []
   },
-  {
+{
     id: 'purerockus',
     name: 'PureRock.US',
     desc: 'America\'s Pure Rock. Hard rock and metal around the clock, with on-demand requests.',
@@ -703,7 +783,7 @@ const stations = [
     url: 'https://purerock.radioca.st/live',
     altUrls: []
   },
-  {
+{
     id: 'swingmusic',
     name: 'Swingmusic.org',
     desc: 'Authentic 1934-1952 big band and swing, curated from a 17,000 track archive. Commercial-free.',
@@ -716,7 +796,7 @@ const stations = [
       'https://streaming.live365.com/a30837_2'
     ]
   },
-  {
+{
     id: 'kzsc',
     name: 'KZSC 88.7 Santa Cruz',
     desc: 'UC Santa Cruz\'s student station. Eclectic college radio with a strong Grateful Dead and jam following. Non-commercial.',
@@ -729,18 +809,7 @@ const stations = [
       'https://kzscfms1-geckohost.radioca.st/kzsclow'
     ]
   },
-  {
-    id: 'edgefm',
-    name: 'EDGE FM',
-    desc: 'The best alternative rock of the 90s, 2K and today. Beck, Radiohead, The Strokes, Foo Fighters and more.',
-    tags: ['90s', '00s', 'Alternative Rock'],
-    filter: 'alternative',
-    color: '#BE185D',
-    icon: 'ED',
-    url: 'https://streaming.live365.com/a54182',
-    altUrls: []
-  },
-  {
+{
     id: 'nj1015',
     name: 'NJ101.5',
     desc: 'Townsquare\'s New Jersey news and talk station, "Talks Jersey". NJ headlines, weather every 10 minutes and traffic every 15.',
@@ -751,29 +820,7 @@ const stations = [
     url: 'https://live.amperwave.net/manifest/townsquare-wkxwfmaac-ibc3',
     altUrls: ['https://live.amperwave.net/direct/townsquare-wkxwfmaac-ibc3']
   },
-  {
-    id: 'wprb',
-    name: 'WPRB 103.3',
-    desc: 'Princeton\'s student radio. Indie, alternative and electronic from the Princeton student body.',
-    tags: ['College', 'Indie', 'Electronic'],
-    filter: 'alternative',
-    color: '#4F46E5',
-    icon: 'WP',
-    url: 'https://wprb.streamguys1.com/live',
-    altUrls: []
-  },
-  {
-    id: 'wrsu',
-    name: 'WRSU 88.7',
-    desc: 'Rutgers University radio. Freeform college station spanning indie, hip-hop and everything between.',
-    tags: ['College', 'Freeform', 'Indie'],
-    filter: 'alternative',
-    color: '#0891B2',
-    icon: 'WR',
-    url: 'https://wrsu-libstrm.radioca.st/stream',
-    altUrls: []
-  },
-  {
+{
     id: 'wfmu',
     name: 'WFMU 91.1',
     desc: 'Listener-supported freeform radio from New Jersey. Alt rock, indie, punk and deep cuts, no ads.',
@@ -786,18 +833,7 @@ const stations = [
       'https://stream0.wfmu.org/freeform-extrahigh-primary.aac'
     ]
   },
-  {
-    id: 'kcsb',
-    name: 'KCSB 107.5',
-    desc: 'UC Santa Barbara college radio. Freeform and eclectic with a strong indie and alternative lean.',
-    tags: ['College', 'Freeform', 'Indie'],
-    filter: 'alternative',
-    color: '#65A30D',
-    icon: 'KC',
-    url: 'https://kcsb.streamguys1.com/live',
-    altUrls: []
-  },
-  {
+{
     id: 'wfuv',
     name: 'WFUV 90.7',
     desc: 'Fordham University station. New York college radio known for indie, alternative and world beats.',
@@ -810,40 +846,7 @@ const stations = [
       'https://music.wfuv.org/music-hi'
     ]
   },
-  {
-    id: 'wzbc',
-    name: 'WZBC 90.3',
-    desc: 'Boston College radio. Eclectic college station spinning indie, alternative and hip-hop.',
-    tags: ['College', 'Indie', 'Hip Hop'],
-    filter: 'alternative',
-    color: '#9D174D',
-    icon: 'WZ',
-    url: 'https://stream.wzbc.org/wzbc',
-    altUrls: []
-  },
-  {
-    id: 'wicb',
-    name: 'WICB 91.7',
-    desc: 'Ithaca College radio. Freeform alternative, indie rock and eclectic programming.',
-    tags: ['College', 'Freeform', 'Alternative'],
-    filter: 'alternative',
-    color: '#7E22CE',
-    icon: 'WI',
-    url: 'https://icecast.do.zufall.co/wicb_mp3_high',
-    altUrls: []
-  },
-  {
-    id: 'wpkn',
-    name: 'WPKN 89.5',
-    desc: 'Bridgeport community radio. Commercial-free freeform with strong indie, folk and world programming.',
-    tags: ['Community', 'Freeform', 'Indie'],
-    filter: 'alternative',
-    color: '#2DD4BF',
-    icon: 'PK',
-    url: 'https://ice25.securenetsystems.net/WPKN',
-    altUrls: []
-  },
-  {
+{
     id: 'wnyc',
     name: 'WNYC 93.9 FM',
     desc: 'New York Public Radio. NPR news with its own local newsroom, plus live music, arts and reporting from the five boroughs.',
@@ -856,7 +859,7 @@ const stations = [
       'http://fm939.wnyc.org/wnycfm.aac'
     ]
   },
-  {
+{
     id: 'wqxr',
     name: 'WQXR 105.9 The Classical Station',
     desc: 'The classical music station of New York Public Radio. Concerts, composer profiles and deep recorded repertoire, around the clock.',
@@ -867,7 +870,7 @@ const stations = [
     url: 'https://stream.wqxr.org/wqxr',
     altUrls: []
   },
-  {
+{
     id: 'wbgo',
     name: 'WBGO 88.3 FM',
     desc: 'Jersey City\'s jazz station. Straight ahead, bebop and swing alongside global jazz, with NPR programming on the hour.',
@@ -878,7 +881,7 @@ const stations = [
     url: 'https://ais-sa8.cdnstream1.com/3629_128.mp3',
     altUrls: []
   },
-  {
+{
     id: 'wxxi',
     name: 'WXXI 91.5 FM',
     desc: 'Rochester\'s public radio station. Mostly classical, with an eclectic mix of jazz, blues and world music in the evening.',
@@ -889,7 +892,7 @@ const stations = [
     url: 'http://playerservices.streamtheworld.com/api/livestream-redirect/WXXIFM.mp3',
     altUrls: []
   },
-  {
+{
     id: 'wdha',
     name: 'WDHA 105.5 The Rock of New Jersey',
     desc: 'The Jersey Shore classic rock station. Deep cuts from the 70s, 80s and 90s mixed with newer hard rock, 24 hours a day.',
@@ -900,7 +903,7 @@ const stations = [
     url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/WDHAFM.mp3',
     altUrls: []
   },
-  {
+{
     id: 'wamc',
     name: 'WAMC 90.3 Northeast Public Radio',
     desc: 'NPR from Albany, covering the Capital Region, the Adirondacks and the Hudson Valley with local news and full-time classical.',
@@ -913,18 +916,7 @@ const stations = [
       'http://playerservices.streamtheworld.com/api/livestream-redirect/WAMCFMAAC.aac'
     ]
   },
-  {
-    id: 'wrvo',
-    name: 'WRVO 89.9 FM',
-    desc: 'Freeform public radio from SUNY Oswego. Indie rock, hip-hop, dub and world music, broadcasting from Oswego up to Syracuse.',
-    tags: ['Freeform', 'Eclectic', 'Syracuse'],
-    filter: 'alternative',
-    color: '#4D7C0F',
-    icon: 'RV',
-    url: 'http://playerservices.streamtheworld.com/api/livestream-redirect/WRVOFM.mp3',
-    altUrls: []
-  },
-  {
+{
     id: 'wrat',
     name: '95.9 The Rat WRAT',
     desc: 'The Jersey Shore\'s rock station since 1996. Roots, blues, classic and alternative rock, from Point Pleasant to Toms River.',
@@ -937,7 +929,7 @@ const stations = [
       'https://playerservices.streamtheworld.com/api/livestream-redirect/WRATFMAAC.aac'
     ]
   },
-  {
+{
     id: 'theblock',
     name: '94.7 The Block',
     desc: 'Newark\'s classic hip hop station. Curt Smith, Funkmaster Flex and Cipha Sounds spinning the throwbacks, 24 hours a day.',
@@ -948,7 +940,7 @@ const stations = [
     url: 'https://live.amperwave.net/direct/audacy-wxbkfmaac-imc',
     altUrls: []
   },
-  {
+{
     id: 'wfan',
     name: 'WFAN 660 AM',
     desc: 'New York\'s sports radio station and the flagship home of the Yankees. Citytv\'s Tony Kornheiser and the Mets and Knicks.',
@@ -959,7 +951,7 @@ const stations = [
     url: 'https://live.amperwave.net/direct/audacy-wfanamaac-imc',
     altUrls: []
   },
-  {
+{
     id: 'metal-arc',
     name: 'Metal ARC Radio',
     desc: 'Twenty five years of round the clock metal with no commercials. Thrash, prog, metalcore, deathcore and djent, streamed at 320kbps.',
@@ -970,7 +962,7 @@ const stations = [
     url: 'https://streaming.live365.com/a65345',
     altUrls: []
   },
-  {
+{
     id: 'bigr-80s-metal',
     name: 'Big R Radio 80s Metal',
     desc: 'The 80s heavy metal and hard rock years, front to back. Def Leppard, Iron Maiden, Van Halen and everything between.',
@@ -983,7 +975,7 @@ const stations = [
       'http://bigrradio-edge1.cdnstream.com/5146_128'
     ]
   },
-  {
+{
     id: 'knac',
     name: 'Pure Rock KNAC',
     desc: 'The long running pure rock station out of Southern California. Guitar driven hard rock, metal and punk with no talk and no ads.',
@@ -994,7 +986,7 @@ const stations = [
     url: 'https://stream.rcast.net/71987',
     altUrls: []
   },
-  {
+{
     id: 'wqwk',
     name: 'WQWK 105.9 Qwikrock',
     desc: 'State College\'s heavy rock station. Loud guitars, hard rock and metal, pumping out of the Centre County since the 70s.',
@@ -1005,7 +997,7 @@ const stations = [
     url: 'https://ice25.securenetsystems.net/WQWK',
     altUrls: []
   },
-  {
+{
     id: 'wxpn',
     name: 'WXPN 88.5 Philadelphia',
     desc: 'The Philadelphia classic rock station. Deep album cuts and the songs other stations stopped playing years ago.',
@@ -1016,20 +1008,7 @@ const stations = [
     url: 'https://wxpnhi.xpn.org/xpnhi',
     altUrls: []
   },
-  {
-    id: 'kalx',
-    name: 'KALX 90.7 Berkeley',
-    desc: 'UC Berkeley\'s student station. Deeply alternative, left field and commercial free, and one of the best indies in the country.',
-    tags: ['Indie', 'Alternative', 'Commercial Free'],
-    filter: 'alternative',
-    color: '#0C4A6E',
-    icon: 'KL',
-    url: 'https://stream.kalx.berkeley.edu:8443/kalx-128.mp3',
-    altUrls: [
-      'https://stream.kalx.berkeley.edu:8443/kalx-320.aac'
-    ]
-  },
-  {
+{
     id: 'kcrw',
     name: 'KCRW 88.9 Santa Monica',
     desc: 'Los Angeles\'s ground breaking indie station. Eclectic, DJ driven and famously commercial free since 1945.',
@@ -1040,7 +1019,7 @@ const stations = [
     url: 'https://streams.kcrw.com/kcrw_mp3',
     altUrls: []
   },
-  {
+{
     id: 'kcrw-e24',
     name: 'KCRW Eclectic 24',
     desc: 'KCRW\'s non stop, no host music stream. All of the station\'s eclectic rotation back to back, 24 hours a day.',
@@ -1051,7 +1030,7 @@ const stations = [
     url: 'https://streams.kcrw.com/e24_mp3',
     altUrls: []
   },
-  {
+{
     id: 'kutx',
     name: 'KUTX 98.9 Austin',
     desc: 'The University of Texas station, widely considered the best college rock station in the country. Indie, electronic and new music.',
@@ -1062,29 +1041,7 @@ const stations = [
     url: 'https://streams.kut.org/4428_56',
     altUrls: []
   },
-  {
-    id: 'witr',
-    name: 'WITR 89.7 Rochester',
-    desc: 'Rochester Institute of Technology\'s freeform station. Genuinely unpredictable music and listener supported with no commercials.',
-    tags: ['Freeform', 'College Radio', 'Commercial Free'],
-    filter: 'alternative',
-    color: '#365314',
-    icon: 'TR',
-    url: 'https://streaming.witr.rit.edu/live-aac-96',
-    altUrls: []
-  },
-  {
-    id: 'wtmd',
-    name: 'WTMD 89.7 Towson',
-    desc: 'Towson University\'s student station in Baltimore. New indie and alternative music with a heavy dose of local bands.',
-    tags: ['College Radio', 'Indie', 'Baltimore'],
-    filter: 'alternative',
-    color: '#4C1D95',
-    icon: 'TM',
-    url: 'http://wtmd-ice.streamguys1.com/wtmd.mp3',
-    altUrls: []
-  },
-  {
+{
     id: 'kpfa',
     name: 'KPFA 94.6 Berkeley',
     desc: 'Pacifica Foundation listener supported radio. Freeform, wildly eclectic and one of the great left field stations on the west coast.',
@@ -1095,7 +1052,7 @@ const stations = [
     url: 'https://streams.kpfa.org:8443/kpfa',
     altUrls: []
   },
-  {
+{
     id: 'radio-paradise',
     name: 'Radio Paradise Main Mix',
     desc: 'Listener supported and commercial free. A hand picked blend of eclectic rock, world and electronica, with zero ads and zero repeats.',
@@ -1109,7 +1066,7 @@ const stations = [
       'http://stream.radioparadise.com/aac-320'
     ]
   },
-  {
+{
     id: 'widr',
     name: 'WIDR 89.1 Drexel',
     desc: 'Drexel University\'s student station in Philadelphia. New hip hop, indie and electronic, commercial free and uncensored.',
@@ -1120,7 +1077,7 @@ const stations = [
     url: 'http://widrfm.net/stream',
     altUrls: []
   },
-  {
+{
     id: 'wvxu',
     name: 'WVXU 91.7 Cincinnati',
     desc: 'Cincinnati public radio with an eclectic mix of world, jazz, folk and indie music alongside NPR programming.',
@@ -1131,7 +1088,7 @@ const stations = [
     url: 'https://stream.cinradio.org/wvxu',
     altUrls: []
   },
-  {
+{
     id: 'wamu',
     name: 'WAMU 88.5 Washington DC',
     desc: 'Public radio from the capital. Local DC reporting, talk and a well loved music show mixing local bands and new releases.',
@@ -1142,7 +1099,7 @@ const stations = [
     url: 'https://wamu.cdnstream1.com/wamu.mp3',
     altUrls: []
   },
-  {
+{
     id: 'wuom',
     name: 'WUOM 91.7 Michigan',
     desc: 'University of Michigan public radio. Great music programming from Ann Arbor alongside NPR news and talk.',
@@ -1153,7 +1110,7 @@ const stations = [
     url: 'https://playerservices.streamtheworld.com/api/livestream-redirect/WUOMFM.mp3',
     altUrls: []
   },
-  {
+{
     id: 'wbez',
     name: 'WBEZ 91.5 Chicago',
     desc: 'Chicago Public Radio. Deep local reporting and the long running BEATs mix of Chicago hip hop, soul and jazz.',
@@ -1679,5 +1636,12 @@ filtersEl.addEventListener('click', (e) => {
 
 renderStations();
 </script>
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="footer-brand">GUNTY RADIO</span>
+    <span class="footer-copy">Smooth streams. Loud vibes. Old-school soul.</span>
+    <a class="report-link footer-report" href="mailto:teeody%2Bgithub@proton.me?subject=Gunty%20Radio%20Problem%20Report">Report a problem</a>
+  </div>
+</footer>
 </body>
 </html>
